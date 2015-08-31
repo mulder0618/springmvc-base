@@ -8,6 +8,18 @@
     <name>springmvc-base Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
+    <properties>
+        <spring.version>4.0.7.RELEASE</spring.version>
+        <mybatis.version>3.2.4</mybatis.version>
+        <cxf.version>2.7.4</cxf.version>
+        <slf4j.version>1.6.6</slf4j.version>
+        <log4j.version>1.2.12</log4j.version>
+        <p.dubbo.version>2.5.3</p.dubbo.version>
+        <p.zookeeper.version>3.4.6</p.zookeeper.version>
+        <p.zkclient.version>0.4</p.zkclient.version>
+        <package.target>test</package.target>
+    </properties>
+
     <repositories>
         <repository>
             <id>nexus</id>
@@ -34,18 +46,6 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
-
-    <properties>
-        <spring.version>4.0.7.RELEASE</spring.version>
-        <mybatis.version>3.2.4</mybatis.version>
-        <cxf.version>2.7.4</cxf.version>
-        <slf4j.version>1.6.6</slf4j.version>
-        <log4j.version>1.2.12</log4j.version>
-        <p.dubbo.version>2.5.3</p.dubbo.version>
-        <p.zookeeper.version>3.4.6</p.zookeeper.version>
-        <p.zkclient.version>0.4</p.zkclient.version>
-        <package.target>notexists</package.target>
-    </properties>
 
     <dependencies>
         <!-- springframe start -->
@@ -283,7 +283,7 @@
         <finalName>springmvc-base</finalName>
         <resources>
             <resource>
-                <directory>src/main/resources/resources_test</directory>
+                <directory>src/main/resources/resources_${package.target}</directory>
                 <includes>
                     <include>**/*.properties</include>
                     <include>**/*.xml</include>
