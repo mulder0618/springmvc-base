@@ -11,22 +11,29 @@
     <!-- 引入jdbc配置文件 -->
     <context:property-placeholder location="classpath:systemconfig.properties"/>
 
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-        <property name="url"
-                  value="jdbc:mysql://10.6.10.165:3306/carddb?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;allowMultiQueries=true"></property>
-        <property name="username" value="gjt"></property>
-        <property name="password" value="123456"></property>
-        <property name="maxActive" value="200"></property>
-        <property name="maxIdle" value="30"></property>
-        <property name="maxWait" value="500"></property>
-        <property name="defaultAutoCommit" value="true"></property>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName"><value>${mjdbc_driverClassName}</value></property>
+        <property name="url"><value>${mjdbc_url}</value></property>
+        <property name="username"><value>${mjdbc_username}</value></property>
+        <property name="password"><value>${mjdbc_password}</value></property>
+        <!-- 连接池最大使用连接数 -->
+        <property name="maxActive"><value>20</value></property>
+        <!-- 初始化连接大小 -->
+        <property name="initialSize"><value>1</value></property>
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait"><value>60000</value></property>
+        <!-- 自动清除无用连接 -->
+        <property name="removeAbandoned"><value>true</value></property>
+        <!-- 清除无用连接的等待时间 -->
+        <property name="removeAbandonedTimeout"><value>1800</value></property>
+        <!-- 连接属性 -->
+        <property name="connectionProperties"><value>clientEncoding=UTF-8</value></property>
     </bean>
 
     <!-- mybatis文件配置，扫描所有mapper文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:MyBatis-Configuration.xmlfiguration.xml"></property>
+        <property name="configLocation" value="classpath:MyBatis-Configuration.xml"></property>
         <property name="typeAliasesPackage" value="acc.entity"></property>
        <!-- <property name="mapperLocations" value="classpath:com/zhx/*/mapper/*.xml"></property>-->
         <property name="plugins">
