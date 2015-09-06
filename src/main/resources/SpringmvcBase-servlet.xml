@@ -33,10 +33,12 @@
     <!-- Jackson转换器 -->
     <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 
-    <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/WEB-INF/PAGES/"
-          p:suffix=".jsp" />
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/PAGES/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
 
     <!--Json解析-->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
@@ -54,6 +56,9 @@
             </list>
         </property>
     </bean>
+
+    <!-- 统一异常处理 -->
+    <bean id="exceptionHandler" class="com.zhx.base.exception.MyExceptionHandler"/>
 
     <!-- 拦截器 -->
     <mvc:interceptors>
