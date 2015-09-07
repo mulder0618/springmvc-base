@@ -40,4 +40,16 @@ public class TestController {
         return modelAndView;
     }
 
+    /**
+     * ≤Â»Î≤‚ ‘
+     * @param modelAndView
+     * @return
+     */
+    @RequestMapping("/testinsert")
+    public ModelAndView testinsert(ModelAndView modelAndView){
+        testService.testInsert("≤‚ ‘");
+        modelAndView.setViewName("test/testindex");
+        return modelAndView;
+    }
+
 }

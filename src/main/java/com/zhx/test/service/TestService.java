@@ -17,10 +17,17 @@ public class TestService extends BaseService   {
     @Autowired
     TestMapper testMapper;
 
+
     public int testCount(){
         return  testMapper.testCount();
     }
 
+
+    public void testInsert(String title){
+        Map paramMap = new HashMap();
+        paramMap.put("title",title);
+        testMapper.testInsert(paramMap);
+    }
 
 
 }
