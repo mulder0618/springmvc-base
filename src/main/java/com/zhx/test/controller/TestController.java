@@ -3,6 +3,7 @@ package com.zhx.test.controller;
 import com.zhx.test.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,9 +46,11 @@ public class TestController {
      * @param modelAndView
      * @return
      */
+    @Transactional
     @RequestMapping("/testinsert")
     public ModelAndView testinsert(ModelAndView modelAndView){
         testService.testInsert("≤‚ ‘");
+        testService.testInsert("≤‚1231222222sdfdsfsdfdsfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffsdfs ‘");
         modelAndView.setViewName("test/testindex");
         return modelAndView;
     }
